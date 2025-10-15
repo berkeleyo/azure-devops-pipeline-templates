@@ -1,0 +1,10 @@
+parameters:
+  vmImage: 'ubuntu-latest'
+jobs:
+- job: build
+  pool: { vmImage: ${{ parameters.vmImage }} }
+  steps:
+  - task: UseDotNet@2
+    inputs: { packageType: 'sdk', version: '8.x' }
+  - script: dotnet build --configuration Release
+  - script: dotnet test --configuration Release --no-build

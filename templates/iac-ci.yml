@@ -1,14 +1,25 @@
+
 parameters:
-  solutionPath: ''
+  - name: solutionPath
+    type: string
+    default: ""
+  - name: bicepLint
+    type: boolean
+    default: true
+
 stages:
-  - stage: build
-    jobs:
-      - job: build
-        pool:
-          vmImage: 'ubuntu-latest'
-        steps:
-          - task: PowerShell@2
-            inputs:
-              targetType: 'inline'
-              script: |
-                Write-Host "Build IaC at $(Build.SourcesDirectory)/${{ parameters.solutionPath }}"
+- stage: Build
+  jobs:
+  - job: BicepBuild
+    pool: { vmImage: 'ubuntu-latest' }
+    steps:
+      - checkout: self
+      - task: AzureCLI@2
+        displayName: "Install Bicep"
+        inputs:
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: az bicep install
+      - script: |
+          find ${{ parameters.solutionPath || '.' }} -name '*.bicep' -print -exec az bicep build --file {} \;
+        displayName: "Build all Bicep files"

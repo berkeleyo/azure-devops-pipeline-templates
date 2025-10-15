@@ -1,7 +1,19 @@
-# azure-devops-pipeline-templates
 
-Reusable Azure DevOps YAML includes: IaC, PowerShell modules, container builds, approvals.
+# Azure DevOps Pipeline Templates
 
-## Getting started
-- Clone and explore.
-- Use the CI workflows as examples.
+Reusable YAML templates for **Bicep builds** and **PowerShell module testing**.
+
+## Use in your pipeline
+```yaml
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: berkeleyo/azure-devops-pipeline-templates
+      ref: refs/heads/main
+
+extends:
+  template: templates/iac-ci.yml@templates
+  parameters:
+    solutionPath: infra/
+```

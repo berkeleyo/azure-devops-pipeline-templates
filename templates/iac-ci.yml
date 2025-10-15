@@ -1,0 +1,14 @@
+parameters:
+  solutionPath: ''
+stages:
+  - stage: build
+    jobs:
+      - job: build
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - task: PowerShell@2
+            inputs:
+              targetType: 'inline'
+              script: |
+                Write-Host "Build IaC at $(Build.SourcesDirectory)/${{ parameters.solutionPath }}"

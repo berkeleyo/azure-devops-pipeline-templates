@@ -1,0 +1,10 @@
+stages:
+  - stage: test
+    jobs:
+      - job: pester
+        pool: { vmImage: 'windows-latest' }
+        steps:
+          - powershell: |
+              Install-Module Pester -Force -Scope CurrentUser
+              Invoke-Pester -Output Detailed
+            displayName: Run Pester

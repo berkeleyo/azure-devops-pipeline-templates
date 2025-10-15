@@ -1,0 +1,11 @@
+{
+  "description": "Reusable Azure DevOps YAML includes: IaC, PowerShell modules, container builds, approvals.",
+  "topics": [
+    "azure-devops",
+    "yaml",
+    "pipelines",
+    "templates",
+    "iac"
+  ],
+  "created": "2025-10-15"
+}

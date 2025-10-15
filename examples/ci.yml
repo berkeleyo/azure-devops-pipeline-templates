@@ -1,0 +1,9 @@
+trigger: { branches: { include: [ main ] } }
+pool: { vmImage: windows-latest }
+stages:
+- stage: CI
+  jobs:
+  - template: templates/powershell-module-ci.yml
+    parameters:
+      modulePath: "src/Tagging"
+      testPath: "tests"

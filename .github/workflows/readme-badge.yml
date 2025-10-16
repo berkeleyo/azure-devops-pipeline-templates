@@ -1,7 +1,10 @@
-name: README Badge
-on: [push]
+﻿name: README Badge
+on:
+  workflow_dispatch:
+[push]
 jobs:
   noop:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Templates repo"
+
